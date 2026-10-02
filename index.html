@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#111827" />
+  <title>RingFit - Đo size nhẫn trên điện thoại</title>
+  <meta name="description" content="Ứng dụng đo size nhẫn đơn giản trên điện thoại bằng cách hiệu chỉnh màn hình và đo đường kính trong của nhẫn." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <header class="hero">
+      <div class="brand">RingFit</div>
+      <h1>Đo size nhẫn ngay trên điện thoại</h1>
+      <p>Hiệu chỉnh màn hình một lần, sau đó đặt nhẫn lên màn hình và kéo vòng tròn cho khớp mép trong.</p>
+    </header>
+
+    <nav class="steps" aria-label="Các bước đo">
+      <button class="step-btn active" data-step="1"><span>1</span>Hiệu chỉnh</button>
+      <button class="step-btn" data-step="2"><span>2</span>Đo nhẫn</button>
+      <button class="step-btn" data-step="3"><span>3</span>Kết quả</button>
+    </nav>
+
+    <section class="panel step-panel active" id="step-1">
+      <div class="panel-head">
+        <p class="eyebrow">Bước 1</p>
+        <h2>Hiệu chỉnh kích thước màn hình</h2>
+        <p>Dùng cạnh ngắn của thẻ ATM / credit card chuẩn <strong>53,98 mm</strong>. Đặt thẻ thật lên màn hình và kéo thanh trượt cho khung bên dưới rộng đúng bằng cạnh ngắn của thẻ.</p>
+      </div>
+
+      <div class="calibration-zone">
+        <div class="card-edge" id="cardEdge">
+          <span>53,98 mm</span>
+        </div>
+      </div>
+
+      <label class="slider-label" for="calibrationSlider">
+        <span>Điều chỉnh chiều rộng</span>
+        <strong id="calibrationPx">280 px</strong>
+      </label>
+      <input id="calibrationSlider" class="range" type="range" min="180" max="360" step="1" value="280" />
+
+      <div class="tip">Mẹo: xoay điện thoại dọc và tăng độ sáng màn hình để dễ canh khớp hơn.</div>
+
+      <button class="primary-btn" id="saveCalibration">Lưu hiệu chỉnh & đo nhẫn</button>
+    </section>
+
+    <section class="panel step-panel" id="step-2">
+      <div class="panel-head">
+        <p class="eyebrow">Bước 2</p>
+        <h2>Đặt nhẫn lên màn hình</h2>
+        <p>Đặt chiếc nhẫn cần đo lên vòng tròn. Chỉnh sao cho vòng tròn màu đen vừa khít với <strong>mép trong</strong> của nhẫn.</p>
+      </div>
+
+      <div class="ring-stage" id="ringStage">
+        <div class="ring-circle" id="ringCircle">
+          <span id="diameterInside">17.0</span>
+          <small>mm</small>
+        </div>
+        <div class="crosshair horizontal"></div>
+        <div class="crosshair vertical"></div>
+      </div>
+
+      <div class="measure-readout">
+        <div><span>Đường kính trong</span><strong><b id="diameterValue">17.0</b> mm</strong></div>
+        <div><span>Chu vi trong</span><strong><b id="circumferenceValue">53.4</b> mm</strong></div>
+      </div>
+
+      <div class="fine-controls">
+        <button type="button" id="minusBtn" aria-label="Giảm 0.1 mm">−</button>
+        <input id="diameterSlider" class="range" type="range" min="12" max="25" step="0.1" value="17" />
+        <button type="button" id="plusBtn" aria-label="Tăng 0.1 mm">+</button>
+      </div>
+
+      <button class="primary-btn" id="showResult">Xem size nhẫn</button>
+      <button class="ghost-btn" id="recalibrate">Hiệu chỉnh lại màn hình</button>
+    </section>
+
+    <section class="panel step-panel" id="step-3">
+      <div class="panel-head result-head">
+        <p class="eyebrow">Kết quả</p>
+        <h2>Size nhẫn tham khảo của bạn</h2>
+      </div>
+
+      <div class="result-card">
+        <div class="size-pill">
+          <span>Size VN tham khảo</span>
+          <strong id="vnSize">13</strong>
+        </div>
+        <div class="result-grid">
+          <div><span>US size</span><strong id="usSize">6.5</strong></div>
+          <div><span>Đường kính</span><strong><b id="resultDiameter">17.0</b> mm</strong></div>
+          <div><span>Chu vi</span><strong><b id="resultCircumference">53.4</b> mm</strong></div>
+        </div>
+      </div>
+
+      <div class="notice">
+        <strong>Lưu ý về độ chính xác</strong>
+        <p>Kết quả phụ thuộc vào bước hiệu chỉnh màn hình và cách canh mép trong của nhẫn. Size VN có thể chênh giữa từng thương hiệu, vì vậy hãy ưu tiên gửi cả đường kính/chu vi mm cho cửa hàng.</p>
+      </div>
+
+      <div class="result-actions">
+        <button class="primary-btn" id="measureAgain">Đo lại</button>
+        <button class="ghost-btn" id="copyResult">Sao chép kết quả</button>
+      </div>
+    </section>
+
+    <section class="helper-card">
+      <h3>Không có nhẫn mẫu?</h3>
+      <p>Bạn có thể đo chu vi ngón tay bằng một dải giấy, nhập số mm bên dưới để ước tính size.</p>
+      <div class="manual-row">
+        <input id="manualCircumference" type="number" min="40" max="80" step="0.1" inputmode="decimal" placeholder="Ví dụ: 54" />
+        <button id="manualCalc">Tính size</button>
+      </div>
+      <p class="manual-result" id="manualResult" aria-live="polite"></p>
+    </section>
+
+    <footer>
+      <p>RingFit • Chạy trực tiếp trên trình duyệt • Không tải ảnh hay dữ liệu lên máy chủ.</p>
+    </footer>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
